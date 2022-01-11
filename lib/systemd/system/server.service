@@ -1,0 +1,11 @@
+[Unit]
+Description=socket server listener
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/server.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
