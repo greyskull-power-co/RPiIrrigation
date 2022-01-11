@@ -1,0 +1,181 @@
+body {
+  background-color: #4d4d4d;
+  color: white;
+  font-size: xx-large;
+  font-family: Impact, sans-serif
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.canClick:hover,
+.canClick:focus {
+  color: #c0392b;
+  background-color: white;
+  border-bottom-color: #DCDCDC;
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 2px 16px;
+  background-color: #4d7c8a;
+  color: white;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 2px 16px;
+  color: black;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 90%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+.clickBox{
+        min-width: 80px;
+        max-width: 240px;
+        display: block;
+        margin: .15em;
+        padding: .15em .15em;
+        border: none;
+        background: #4d7c8a;
+        color: white;
+        vertical-align: middle;
+        position: relative;
+        display: inline-block;
+        -webkit-backface-visibility: hidden;
+        -moz-osx-font-smoothing: grayscale;
+        overflow: hidden;
+        -webkit-transition: color 0.3s;
+        transition: color 0.3s;
+}
+
+
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+   -webkit-animation: flickerAnimation 1s infinite;
+   -moz-animation: flickerAnimation 1s infinite;
+   -o-animation: flickerAnimation 1s infinite;
+    animation: flickerAnimation 1s infinite;
+}
+
+
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -200px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+
+select {
+  width: 40%;
+  height: 50px;
+  font-size: 80%;
+  cursor: pointer;
+  border-radius: 0;
+  background-color: #c0392b;
+  border: none;
+  border-bottom: 2px solid #962d22;
+  color: white;
+  padding: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px;
+}
+
+select:hover,
+select:focus {
+  color: #c0392b;
+  background-color: white;
+  border-bottom-color: #DCDCDC;
+}
+
+.clickBox{
+        min-width: 80px;
+        max-width: 240px;
+        display: block;
+        margin: .15em;
+        padding: .15em .15em;
+        border: none;
+        background: #4d7c8a;
+        color: white;
+        vertical-align: middle;
+        position: relative;
+        display: inline-block;
+        -webkit-backface-visibility: hidden;
+        -moz-osx-font-smoothing: grayscale;
+        overflow: hidden;
+        -webkit-transition: color 0.3s;
+        transition: color 0.3s;
+}
+
+input[type=checkbox] {
+
+ -ms-transform: scale(2); /* IE */
+ -moz-transform: scale(2); /* FF */
+ -webkit-transform: scale(2); /* Safari and Chrome */
+ -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
+
+/* Tooltip container */
+.tips {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tips .tiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  position: absolute;
+  z-index: 1;
+}
+
+.tips:hover .tiptext {
+  visibility: visible;
+}
