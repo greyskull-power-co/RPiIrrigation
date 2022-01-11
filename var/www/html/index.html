@@ -1,0 +1,1612 @@
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<div id="zoneModal" class="modal">
+
+  <!-- Modal content -->
+<div class="modal-content">
+    <div class="modal-header">
+        <span class="close" style="float:right">[[close window]]</span>
+        <h3 id="zoneModalHeader">zone x</h3>
+    </div>
+    <div class="modal-body">
+	
+        <p>set a name for this zone:
+		<span class="tips" style='font-size:medium';>[[tip]]
+  		<span class="tiptext">come up with a name for your zone, up to 24 characters</span>
+		</span>
+		</p>
+        <input type="text" id="zoneNickname" maxlength="24" style='font-size:x-large;'>
+        <br>
+        <button onclick="nameSet()" style='font-size:x-large;'>set name</button>
+        <button onclick="nameRemove()" style='font-size:x-large;'>remove name</button></p>
+        change watering restrictions to:
+		<span class="tips" style='font-size:medium';>[[tip]]
+  		<span class="tiptext">this will limit when watering can happen, for example if your town has a watering ban</span>
+		</span>
+        <select id="nDays" onchange="displayRestrictions()">
+            <option value="1">everyday - no restrictions</option>
+            <option value="odd">odd days</option>
+            <option value="even">even days</option>
+            <option value="3">every 3rd day</option>
+            <option value="4">every 4th day</option>
+            <option value="5">every 5th day</option>
+            <option value="6">every 6th day</option>
+            <option value="choose">choose weekdays</option>
+			<option value="month">choose month days</option>
+
+        </select>
+        
+        <span id ='daysofweek'>  
+            <input type="checkbox" id="monday" value="m"> monday
+            <input type="checkbox" id="tuesday" value="t"> tuesday
+            <input type="checkbox" id="wednesday" value="w"> wednesday
+            <p></p>
+            <input type="checkbox" id="thursday" value="Th"> thursday
+            <input type="checkbox" id="friday" value="f"> friday
+            <input type="checkbox" id="saturday" value="Sa"> saturday
+            <input type="checkbox" id="sunday" value="Su"> sunday
+        </span>
+	
+	    <span id ='daysofmonth'>  
+            <input type="checkbox" id="d01" value=d01> 01 
+			<input type="checkbox" id="d02" value=d02> 02
+			<input type="checkbox" id="d03" value=d03> 03
+			<input type="checkbox" id="d04" value=d04> 04
+			<input type="checkbox" id="d05" value=d05> 05
+			<input type="checkbox" id="d06" value=d06> 06
+			<input type="checkbox" id="d07" value=d07> 07
+			<br>
+            <input type="checkbox" id="d08" value=d08> 08
+			<input type="checkbox" id="d09" value=d09> 09
+			<input type="checkbox" id="d10" value=d10> 10
+			<input type="checkbox" id="d11" value=d11> 11
+			<input type="checkbox" id="d12" value=d12> 12
+			<input type="checkbox" id="d13" value=d13> 13
+			<input type="checkbox" id="d14" value=d14> 14
+			<br>
+            <input type="checkbox" id="d15" value=d15> 15
+			<input type="checkbox" id="d16" value=d16> 16
+			<input type="checkbox" id="d17" value=d17> 17
+			<input type="checkbox" id="d18" value=d18> 18
+			<input type="checkbox" id="d19" value=d19> 19
+			<input type="checkbox" id="d20" value=d20> 20
+			<input type="checkbox" id="d21" value=d21> 21
+			<br>
+            <input type="checkbox" id="d22" value=d22> 22
+			<input type="checkbox" id="d23" value=d23> 23
+			<input type="checkbox" id="d24" value=d24> 24
+			<input type="checkbox" id="d25" value=d25> 25
+			<input type="checkbox" id="d26" value=d26> 26
+			<input type="checkbox" id="d27" value=d27> 27
+			<input type="checkbox" id="d28" value=d28> 28
+			<br>
+            <input type="checkbox" id="d29" value=d29> 29
+			<input type="checkbox" id="d30" value=d30> 30
+			<input type="checkbox" id="d31" value=d31> 31
+			<br>
+
+        </span>
+        
+                <button onclick="restrictionSet()" style='font-size:x-large;'>set days</button>
+
+
+        <p> start time [a]
+                <input type="time" id="onA" style='font-size:x-large;'>
+            end time [a]
+                <input type="time" id="offA" style='font-size:x-large;'>
+            <br>
+                <button onclick="timeSet('onA:offA')" style='font-size:x-large;'>set time</button>
+                <button onclick="timeClear('onA:offA')" style='font-size:x-large;'>remove time</button>
+        </p>
+        <p> start time [b]
+                <input type="time" id="onB" style='font-size:x-large;'>
+            end time [b]
+                <input type="time" id="offB" style='font-size:x-large;'>
+            <br>
+                <button onclick="timeSet('onB:offB')" style='font-size:x-large;'>set time</button>
+                <button onclick="timeClear('onB:offB')" style='font-size:x-large;'>remove time</button>
+        </p>
+        <p> start time [c]
+                <input type="time" id="onC" style='font-size:x-large;'>
+            end time [c]
+                <input type="time" id="offC" style='font-size:x-large;'>
+            <br>
+                <button onclick="timeSet('onC:offC')" style='font-size:x-large;'>set time</button>
+                <button onclick="timeClear('onC:offC')" style='font-size:x-large;'>remove time</button>
+        </p>
+        <p> start time [d]
+                <input type="time" id="onD" style='font-size:x-large;'>
+            end time [d]
+                <input type="time" id="offD" style='font-size:x-large;'>
+            <br>
+                <button onclick="timeSet('onD:offD')" style='font-size:x-large;'>set time</button>
+                <button onclick="timeClear('onD:offD')" style='font-size:x-large;'>remove time</button>
+        </p>
+        <p> start time [e]
+                <input type="time" id="onE" style='font-size:x-large;'>
+            end time [e]
+                <input type="time" id="offE" style='font-size:x-large;'>
+            <br>
+                <button onclick="timeSet('onE:offE')" style='font-size:x-large;'>set time</button>
+                <button onclick="timeClear('onE:offE')" style='font-size:x-large;'>remove time</button>
+        </p>
+             
+     </div>
+
+</div>
+
+</div>
+
+<div id="weatherModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+   <div class="modal-header">
+    <span class="wclose" style="float:right">[[close window]]</span>
+	   
+	   	<div class="tips" style='font-size:medium';>[[tip]]
+  			<span class="tiptext">use 'lookup zip' to see if your zip is on file, and 'submit zip' to start checking. weather is checked between 12:05 and 12:14 am daily. if your zip code is not found, choose a nearby zip code</span>
+		</div>
+    <h2 id="WeatherModalHeader">weather</h2>
+   </div>
+     <div class="modal-body">
+		 <span id="currentLocation">[[current location]]</span>
+		 <p></p>
+         <div>
+         <span id="town"></span><span id="latitude"></span><span id="longitude"></span>
+         </div>
+         <input id="zipcode" class="zipcode" type="text" placeholder="enter zip" value = "" minlength="5" maxlength="5" size="20" style='font-size:x-large;'>
+         <button onclick="zipLookup()" style='font-size:x-large;'>look up zip code</button>
+         <button onclick="zipConfirm()" style='font-size:x-large;'>submit zip code</button>
+		 <p></p>
+		 set rain limiter 	   	
+		 <select id = "pop">
+			 <option value="101">no rain restrictions</option>
+			 <option value="10">10%</option>
+			 <option value="20">20%</option>
+			 <option value="30">30%</option>
+			 <option value="40">40%</option>
+			 <option value="50">50%</option>
+			 <option value="60">60%</option>
+			 <option value="70">70%</option>
+			 <option value="80">80%</option>
+			 <option value="90">90%</option>
+		 </select>
+		 <button onclick ="submitRainLimit()" style='font-size:x-large;'>submit rain limit</button>
+		 <div class="tips" style='font-size:medium';>[[tip]]
+  			<span class="tiptext">irrigation will pause if the chance of rain is higher than this number, saving water</span>
+		</div>
+     </div>
+  </div>
+
+</div>
+	
+<div id="networkModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+   <div class="modal-header">
+    <span class="netSpan" style="float:right">[[close window]]</span>
+	   
+	   	<div class="tips" style='font-size:medium';>[[tip]]
+  			<span class="tiptext">your wifi must be 2.4ghz</span>
+		</div>
+    <h2 id="networkModalHeader">networking</h2>
+   </div>
+     <div class="modal-body">
+		 wifi name [ssid]
+		<input type="text" id="ssid" maxlength="96" style='font-size:x-large;'>
+		 <br>
+		 wifi password
+		 <input type="password" id="password" maxlength="96" style='font-size:x-large;'>
+		 <br>
+		 <button onclick="submitWifi()" style='font-size:x-large;'>submit wifi credentials</button>
+		 <button onclick="joinWifi()" style='font-size:x-large;'>join wifi</button>
+		 <button onclick="createWifi()" style='font-size:x-large;'>create local wifi</button>
+
+	  </div>
+	</div>
+</div>
+
+
+<div id="systemModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+   <div class="modal-header">
+    <span class="sysclose" style="float:right">[[close window]]</span>
+	   
+	   	<div class="tips" style='font-size:medium';>[[tip]]
+  			<span class="tiptext">make suretail - your mobile number has no dashes, spaces, dots - ie 18009992345</span>
+		</div>
+    <h2 id="noticeModalHeader">system</h2>
+   </div>
+     <div class="modal-body">
+		 system information
+		 <br>
+		 <span id="systemuptime">[[uptime]]</span>
+		 <br>
+		<span id="temp">[[temperature]]</span>
+		 <br>
+		 <span id="drive">[[drive space]]</span>
+		 <br>
+		<button onclick="submitTime()" style='font-size:x-large;'>submit current time</button>
+		 <p>
+		 <button onclick="shutdown()" style='font-size:x-large;'>shut down</button>
+		 </p>
+	  </div>
+	</div>
+</div>
+	
+	
+<div id="noticeModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+   <div class="modal-header">
+    <span class="nclose" style="float:right">[[close window]]</span>
+	   
+	   	<div class="tips" style='font-size:medium';>[[tip]]
+  			<span class="tiptext">make suretail - your mobile number has no dashes, spaces, dots - ie 18009992345</span>
+		</div>
+    <h2 id="noticeModalHeader">notifications</h2>
+   </div>
+     <div class="modal-body">
+		 enter email or sms recipient for system summaries
+		<input id="email" class="zipcode" type="text" placeholder="enter email" value = "" minlength="1" maxlength="96" size="20" style='font-size:x-large;'>
+		 <br>
+		 <button onclick="submitEmail()" style='font-size:x-large;'>submit email</button>
+		 <br>
+		<input id="mobile" class="zipcode" type="text" placeholder="enter phone number" value = "" minlength="1" maxlength="10" size="20" style='font-size:x-large;'>
+		<select id="carrier">
+			<option value="">choose provider...</option>
+            <option value="@txt.att.net">att</option>
+            <option value="@vtext.com">verizon</option>
+            <option value="@email.uscc.net">us cellular</option>
+            <option value="@messaging.sprintpcs.com">sprint</option>
+            <option value="@tmomail.net">tmobile</option>
+            <option value="@vmobl.com">virgin</option>
+
+        </select>
+		 <br>
+		 <button onclick="submitMobile()" style='font-size:x-large;'>submit phone number</button>
+		 <p></p>
+		 	set frequency of system activity notices
+		    <select id="fqy">
+            <option value="0">no notices</option>
+            <option value="1">daily</option>
+			<option value="7">weekly</option>
+		 </select>
+		 <br>
+		<button onclick="submitFrequency()" style='font-size:x-large;'>submit notification frequency</button>
+		 <p>
+		 <button onclick="testNotices()" style='font-size:x-large;'>test notifications</button>
+		 </p>
+	  </div>
+	</div>
+</div>
+
+
+<span id="time">[[ loading time.. ]]</span>
+<br>
+	
+<b> system </b>
+<span class='canClick' id="uptime" onclick="systemLoader()">[[ loading server status.. ]]</span>
+<br>
+
+<b> network </b>
+<span class='canClick' id="ntwk" onclick="networkLoader()"> [[ loading network status.. ]] </span>
+<br>
+<b> notifications </b>
+<span class='canClick' id="notifications" onclick="noticeLoader()"> [[ loading.. ]] </span>
+<br>
+<b> weather </b>
+<span id="weather" class="canClick" onclick="weatherLoader()"> [[ loading.. ]] </span>
+<br>
+<b> rain delay</b>
+<span id="wthreshold" class="canClick" onclick="weatherLoader()"> [[ loading.. ]] </span>
+<br>
+<p></p>
+
+
+		<span class="tips" style='font-size:medium';>[[tip]]
+  		<span class="tiptext">here information will be shown about each zone. it is updated in real time, and will hide zones with no active run times.</span>
+		</span>	
+<br>
+
+<script>
+	
+	
+const zeroPad = (num, places) => String(num).padStart(places, '0');
+var zonemodal = document.getElementById("zoneModal");
+var weatherModal = document.getElementById("weatherModal");
+var noticeModal = document.getElementById("noticeModal");
+var networkModal = document.getElementById("networkModal");
+var systemModal = document.getElementById("systemModal");
+
+zonemodal.style.display = "none";
+weatherModal.style.display = "none";
+noticeModal.style.display = "none";
+networkModal.style.display = "none";
+systemModal.style.display = "none";
+	
+var nspan = document.getElementsByClassName("nclose")[0];
+var span = document.getElementsByClassName("close")[0];
+var wspan = document.getElementsByClassName("wclose")[0];
+var netSpan = document.getElementsByClassName("netSpan")[0];
+var sysSpan = document.getElementsByClassName("sysclose")[0];
+	
+netSpan.onclick = function() {
+	networkModal.style.display = "none";
+}
+	
+span.onclick = function() {
+  zonemodal.style.display = "none";
+}
+
+wspan.onclick = function() {
+  weatherModal.style.display = "none";
+}
+
+nspan.onclick = function(){
+	noticeModal.style.display = "none";
+}
+
+sysSpan.onclick = function(){
+	systemModal.style.display = "none";
+}
+
+function noticeLoader(){
+	noticeModal.style.display = "block";
+	socket.send("loadingNotices");
+}
+
+function weatherLoader(){
+	weatherModal.style.display = "block";
+        socket.send("loadingWeather");
+}
+	
+function networkLoader(){
+	networkModal.style.display = "block";
+		socket.send("loadingNetwork");
+}
+
+function systemLoader(){
+	systemModal.style.display = "block";
+	socket.send("loadingSystem");
+}
+    	
+var url = window.location.href;
+var hostname = (new URL(url)).hostname;
+	
+let socket = new WebSocket("ws://" + hostname + ":8888/ws");
+    
+socket.onopen = function(e) {
+//here you send the initial opening message, good to get each zone status.
+}
+
+siteBuilder();
+    
+//dynamically build the site    
+function siteBuilder(){
+    
+    for (var i = 1; i < 24; i++) {
+        if (i < 10){
+            i = "0" + i;
+        }
+		
+		document.write( "<div style='background-color:#647068;color:white;font-size:x-large;'>" );
+                document.write("<span class='timeInfo' id='nickname:" + i + "'></span>");
+		        document.write("<span class='timeInfo' id='restrictions:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='onTimeA:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='offTimeA:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='onTimeB:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='offTimeB:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='onTimeC:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='offTimeC:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='onTimeD:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='offTimeD:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='onTimeE:" + i + "'></span>");
+                document.write("<span class='timeInfo' id='offTimeE:" + i + "'></span>");
+        document.write("</div>");
+		
+        document.write( "<div>");
+            document.write("<span class='clickBox' id='zone:" + i + "' onclick='zoneLoader(" + i + ")'> [[ zone " + i + " ]] </span>");
+
+                document.write("<span class = 'clickBox' id='status:" + i + "'>[[status...]]</span>");
+                document.write("<span class='clickBox' onclick='deactivate("+i+")' id='off:" + i + "'> [[deactivate]] </span>");
+                document.write("<span class='clickBox' onclick='auto("+i+")'id='auto:" + i + "'> [[auto]] </span>");
+                document.write("<span class='canClick' onclick='activate("+i+")'id='on:" + i + "'> [[activate]] </span>");
+		
+        document.write("</div>");
+		
+		document.write("<br>");
+        
+
+    }
+}
+    
+socket.onmessage = function(messageData){
+    incoming = messageData.data;
+    inc = incoming.split(',');
+    
+    if ( inc[0] == "zipLookup"){
+        var zipCode = inc[1];
+        var town = inc[2];
+        var state = inc[3];
+        var lat = inc[4].substring(7);
+        var lon = inc[5].substring(7);
+        
+        if ( town != undefined && town != "None"){
+            //var town = "nickname:" + znumber;
+            var townSet = document.getElementById( "town" );
+        
+            while(townSet.firstChild){
+                
+                if (townSet.firstChild != null){
+                    townSet.removeChild(townSet.firstChild);
+                }
+            }
+            townSet.appendChild( document.createTextNode(town + ", " + state + " - " + "latitude: " + lat + " longitude: " + lon));
+        }
+    }
+    if (inc[0] == "weather"){
+        var cor = inc[2];
+        var hour = inc[9];
+        var minute = inc[10];
+		var lat = inc[4].substring(7);
+		var lon = inc[5].substring(7);
+		var threshold = inc[3];
+		
+		if (threshold != "101"){
+			threshold = threshold + "%";
+		}
+		if (threshold == "101"){
+			threshold = "[no limitation]";
+		}
+
+        if (minute < 10){
+            minute = "0" + minute;
+        }
+        var lastCheck = hour + ":" + minute + " " + inc[7] + "/" + inc[8] + "/" + inc[6];
+        var wupdate = document.getElementById( "weather" );
+		var wthreshold = document.getElementById("wthreshold");
+		
+            while(wupdate.firstChild){
+               wupdate.removeChild(wupdate.firstChild);
+            }
+                    wupdate.appendChild( document.createTextNode( "chance of rain: " + cor + "% last check: " + lastCheck ));
+    
+	            while(wthreshold.firstChild){
+               wthreshold.removeChild(wthreshold.firstChild);
+            }
+               wthreshold.appendChild( document.createTextNode( " if chance of rain is " +  threshold + " or higher"));
+		
+	}
+	
+	if(inc[0] == "time"){
+		var time = inc[1];
+		var timeElement = document.getElementById("time");
+			
+            while(timeElement.firstChild){
+               timeElement.removeChild(timeElement.firstChild);
+            }
+                    timeElement.appendChild( document.createTextNode( time ));
+		
+	}
+	
+	if(inc[0] == "systemStatus"){
+		var uptime = inc[3];
+		var freeSpace = inc[1];
+		var cpuTemp = inc[2];
+		var sut = document.getElementById("systemuptime");
+		var drive = document.getElementById("drive");
+		var temp = document.getElementById("temp");
+			
+            while(sut.firstChild){
+               sut.removeChild(sut.firstChild);
+            }
+                    sut.appendChild( document.createTextNode( uptime ));
+		    while(drive.firstChild){
+               drive.removeChild(drive.firstChild);
+            }
+                    drive.appendChild( document.createTextNode( freeSpace ));
+		
+		    while(temp.firstChild){
+               temp.removeChild(temp.firstChild);
+            }
+                    temp.appendChild( document.createTextNode( cpuTemp + " celcius" ));
+		
+	}
+	
+	if (inc[0] == "ntwk"){
+		var ntwk = inc[1];
+		var ntwkElement = document.getElementById("ntwk");
+		if (ntwk.length < 1){
+			ntwk = "n/a";
+		}			
+            while(ntwkElement.firstChild){
+               ntwkElement.removeChild(ntwkElement.firstChild);
+            }
+                    ntwkElement.appendChild( document.createTextNode( ntwk ));
+		
+	}
+	
+	
+		if (inc[0] == "ntc"){
+		var ntc = inc[1];
+		var fq = inc[2];
+		
+		if (fq == "7"){
+			fq = "[weekly]"
+		}
+		if (fq == "1"){
+			fq = "[daily]"
+		}
+		if (fq == "0"){
+			fq = "[no notices]"
+		}
+		
+		if (ntc.length < 1){
+			ntc = "n/a";
+		}
+		var ntcElement = document.getElementById("notifications");
+			
+            while(ntcElement.firstChild){
+               ntcElement.removeChild(ntcElement.firstChild);
+            }
+                    ntcElement.appendChild( document.createTextNode( ntc + " " + fq ));
+		
+	}
+	
+	if ( inc[0] == "geoLookup"){
+		var zip = inc[1];
+		var town = inc[2];
+		var state = inc[3];
+		var lat = inc[4].substring(7);
+		var lon = inc[5].substring(7);
+		var currLoc = document.getElementById( "currentLocation" );
+		""
+		if (zip.length < 5){
+			zip = "0" + zip;
+		}
+		if (zip.length < 5){
+			zip = "0" + zip;
+		}
+		
+
+		var wLink = document.createTextNode("monitoring weather for: " + town +", " + state + " " + zip)
+		//wLink.href = "https://forecast.weather.gov/MapClick.php?lat=" + lat + "&lon=" + lon + "&unit=0&lg=english&FcstType=text&TextType=1";
+		function goToWeather(){
+			window.open("https://forecast.weather.gov/MapClick.php?lat=" + lat + "&lon=" + lon + "&unit=0&lg=english&FcstType=text&TextType=1");
+		}
+		
+		        var a = document.createElement('a');  
+                var link = document.createTextNode("monitoring weather for: " + town +", " + state + " " + zip); 
+                a.appendChild(link);  
+                a.title = "monitoring weather for: " + town +", " + state + " " + zip;  
+                a.href = "https://forecast.weather.gov/MapClick.php?lat=" + lat + "&lon=" + lon + "&unit=0&lg=english&FcstType=text&TextType=1";   
+                //document.body.appendChild(a);
+		
+        while(currLoc.firstChild){
+        	currLoc.removeChild(currLoc.firstChild);
+        }
+
+        currLoc.appendChild( a );
+		//wLink.addEventListener('click', function(){goToWeather();}, false);
+					
+	}
+	
+	
+    if ( inc[0] == "loadingZone"){
+        
+        var nickName = inc[2];
+        var onta = zeroPad(inc[3],4).slice(0,2)+":"+zeroPad(inc[3],4).slice(2);
+        var offta = zeroPad(inc[8],4).slice(0,2)+":"+zeroPad(inc[8],4).slice(2);
+        var ontb = zeroPad(inc[4],4).slice(0,2)+":"+zeroPad(inc[4],4).slice(2);
+        var offtb = zeroPad(inc[9],4).slice(0,2)+":"+zeroPad(inc[9],4).slice(2);
+        var ontc = zeroPad(inc[5],4).slice(0,2)+":"+zeroPad(inc[5],4).slice(2);
+        var offtc = zeroPad(inc[10],4).slice(0,2)+":"+zeroPad(inc[10],4).slice(2);
+        var ontd = zeroPad(inc[6],4).slice(0,2)+":"+zeroPad(inc[6],4).slice(2);
+        var offtd = zeroPad(inc[11],4).slice(0,2)+":"+zeroPad(inc[11],4).slice(2);
+        var onte = zeroPad(inc[7],4).slice(0,2)+":"+zeroPad(inc[7],4).slice(2);
+        var offte = zeroPad(inc[12],4).slice(0,2)+":"+zeroPad(inc[12],4).slice(2);
+        
+        document.getElementById("zoneNickname").value = nickName;
+        document.getElementById("onA").value = onta;
+        document.getElementById("onB").value = ontb;
+        document.getElementById("onC").value = ontc;
+        document.getElementById("onD").value = ontd;
+        document.getElementById("onE").value = onte;
+        document.getElementById("offA").value = offta;
+        document.getElementById("offB").value = offtb;
+        document.getElementById("offC").value = offtc;
+        document.getElementById("offD").value = offtd;    
+        document.getElementById("offE").value = offte;
+	
+    }
+    
+    if( inc[0] == "overview"){
+        var nickName = inc[2];
+        var onta = zeroPad(inc[3],4).slice(0,2)+":"+zeroPad(inc[3],4).slice(2);
+        var offta = zeroPad(inc[8],4).slice(0,2)+":"+zeroPad(inc[8],4).slice(2);
+        var ontb = zeroPad(inc[4],4).slice(0,2)+":"+zeroPad(inc[4],4).slice(2);
+        var offtb = zeroPad(inc[9],4).slice(0,2)+":"+zeroPad(inc[9],4).slice(2);
+        var ontc = zeroPad(inc[5],4).slice(0,2)+":"+zeroPad(inc[5],4).slice(2);
+        var offtc = zeroPad(inc[10],4).slice(0,2)+":"+zeroPad(inc[10],4).slice(2);
+        var ontd = zeroPad(inc[6],4).slice(0,2)+":"+zeroPad(inc[6],4).slice(2);
+        var offtd = zeroPad(inc[11],4).slice(0,2)+":"+zeroPad(inc[11],4).slice(2);
+        var onte = zeroPad(inc[7],4).slice(0,2)+":"+zeroPad(inc[7],4).slice(2);
+        var offte = zeroPad(inc[12],4).slice(0,2)+":"+zeroPad(inc[12],4).slice(2);
+		var restrictions = inc[23];
+		var manualOverride = inc[24];
+		var activeState = inc[25];
+        
+        if (onta != "99:99" && offta != "99:99"){
+            var runTimeA = "| " + onta + " to " + offta + " |";
+        } else {
+            var runTimeA = "";
+        }
+        if (ontb != "99:99" && offtb != "99:99"){
+            var runTimeB = "| " + ontb + " to " + offtb + " |";
+        } else {
+            var runTimeB = "";
+        }
+        if (ontc != "99:99" && offtc != "99:99"){
+            var runTimeC = "| " + ontc + " to " + offtc + " |";
+        } else {
+            var runTimeC = "";
+        }
+        if (ontd != "99:99" && offtd != "99:99"){
+            var runTimeD = "| " + ontd + " to " + offtd + " |";
+        } else {
+            var runTimeD = "";
+        }
+        if (onte != "99:99" && offte != "99:99"){
+            var runTimeE = "| " + onte + " to " + offte + " |";
+        } else {
+            var runTimeE = "";
+        }
+        if ( inc[1] < 10 ){
+            znumber = "0" + inc[1];
+        }
+		if ( inc[1] >= 10){
+			znumber = inc[1];
+		}
+        
+		var hourOnA = (zeroPad(inc[3],4).slice(0,2));
+		var hourOffA = (zeroPad(inc[8],4).slice(0,2));
+		var minuteOnA = zeroPad(inc[3],4).slice(2);
+		var minuteOffA = zeroPad(inc[8],4).slice(2);
+		
+		var hourOnB = (zeroPad(inc[4],4).slice(0,2));
+		var hourOffB = (zeroPad(inc[9],4).slice(0,2));
+		var minuteOnB = zeroPad(inc[4],4).slice(2);
+		var minuteOffB = zeroPad(inc[9],4).slice(2);
+	
+		var hourOnC = (zeroPad(inc[5],4).slice(0,2));
+		var hourOffC = (zeroPad(inc[10],4).slice(0,2));
+		var minuteOnC = zeroPad(inc[5],4).slice(2);
+		var minuteOffC = zeroPad(inc[10],4).slice(2);
+		
+		var hourOnD = (zeroPad(inc[6],4).slice(0,2));
+		var hourOffD = (zeroPad(inc[11],4).slice(0,2));
+		var minuteOnD = zeroPad(inc[6],4).slice(2);
+		var minuteOffD = zeroPad(inc[11],4).slice(2);
+		
+		var hourOnE = (zeroPad(inc[7],4).slice(0,2));
+		var hourOffE = (zeroPad(inc[12],4).slice(0,2));
+		var minuteOnE = zeroPad(inc[7],4).slice(2);
+		var minuteOffE = zeroPad(inc[12],4).slice(2);
+		
+        //var totA = inc[8] - inc[3];
+		var totA = 60*(hourOffA - hourOnA) + (minuteOffA - minuteOnA);
+        var totB = 60*(hourOffB - hourOnB) + (minuteOffB - minuteOnB);
+        var totC = 60*(hourOffC - hourOnC) + (minuteOffC - minuteOnC);
+        var totD = 60*(hourOffD - hourOnD) + (minuteOffD - minuteOnD);
+        var totE = 60*(hourOffE - hourOnE) + (minuteOffE - minuteOnE);
+        
+        var totalRunTime = "| total run time: " + (totA + totB + totC + totD + totE) + " minutes";
+        if ((totA + totB + totC + totD + totE) < 1){
+            totalRunTime = "";
+        }
+        
+		var rest = "";
+		
+		if (restrictions == 1){
+			rest = "everyday";
+		}
+		if (restrictions == "odd"){
+			rest = "odd days";
+		}
+		if (restrictions == "even"){
+			rest = "even days";
+		}
+		if (restrictions == "3"){
+			rest = "every 3 days";
+		}
+		if (restrictions == "4"){
+			rest = "every 4 days";
+		}
+		if (restrictions == "5"){
+			rest = "every 5 days";
+		}
+		if (restrictions == "6"){
+			rest = "every 6 days";
+		}
+		if (restrictions.includes("m")){
+			rest = rest + "mon.";
+		}
+		if (restrictions.includes("t")){
+			rest = rest + "tue.";
+		}
+		if (restrictions.includes("w")){
+			rest = rest + "wed.";
+		}
+		if (restrictions.includes("Th")){
+			rest = rest + "thu.";
+		}
+		if (restrictions.includes("f")){
+			rest = rest + "fri.";
+		}
+		if (restrictions.includes("Sa")){
+			rest = rest + "sat.";
+		}
+		if (restrictions.includes("Su")){
+			rest = rest + "sun.";
+		}
+		if (restrictions.includes("d01")){
+			rest = rest + "1st."
+		}
+		if (restrictions.includes("d02")){
+			rest = rest + "2nd."
+		}
+		if (restrictions.includes("d03")){
+			rest = rest + "3rd."
+		}
+		if (restrictions.includes("d04")){
+			rest = rest + "4th."
+		}
+		if (restrictions.includes("d05")){
+			rest = rest + "5th."
+		}
+		if (restrictions.includes("d06")){
+			rest = rest + "6th."
+		}
+		if (restrictions.includes("d07")){
+			rest = rest + "7th."
+		}
+		if (restrictions.includes("d08")){
+			rest = rest + "8th."
+		}
+		if (restrictions.includes("d09")){
+			rest = rest + "9th."
+		}
+		if (restrictions.includes("d10")){
+			rest = rest + "10th."
+		}
+		if (restrictions.includes("d11")){
+			rest = rest + "11th."
+		}
+		if (restrictions.includes("d12")){
+			rest = rest + "12th."
+		}
+		if (restrictions.includes("d13")){
+			rest = rest + "13th."
+		}
+		if (restrictions.includes("d14")){
+			rest = rest + "14th."
+		}
+		if (restrictions.includes("d15")){
+			rest = rest + "15th."
+		}
+		if (restrictions.includes("d16")){
+			rest = rest + "16th."
+		}
+		if (restrictions.includes("d17")){
+			rest = rest + "17th."
+		}
+		if (restrictions.includes("d18")){
+			rest = rest + "18th."
+		}
+		if (restrictions.includes("d19")){
+			rest = rest + "19th."
+		}
+		if (restrictions.includes("d20")){
+			rest = rest + "20th."
+		}
+		if (restrictions.includes("d21")){
+			rest = rest + "21st."
+		}
+		if (restrictions.includes("d22")){
+			rest = rest + "22nd."
+		}
+		if (restrictions.includes("d23")){
+			rest = rest + "23rd."
+		}
+		if (restrictions.includes("d24")){
+			rest = rest + "24th."
+		}
+		if (restrictions.includes("d25")){
+			rest = rest + "25th."
+		}
+		if (restrictions.includes("d26")){
+			rest = rest + "26th."
+		}
+		if (restrictions.includes("d27")){
+			rest = rest + "27th."
+		}
+		if (restrictions.includes("d28")){
+			rest = rest + "28th."
+		}
+		if (restrictions.includes("d29")){
+			rest = rest + "29th."
+		}
+		if (restrictions.includes("d30")){
+			rest = rest + "30th."
+		}
+		if (restrictions.includes("d31")){
+			rest = rest + "31st."
+		}
+        if ( nickName != undefined && nickName != "None"){
+            var nn = "nickname:" + znumber;
+            var nset = document.getElementById( nn );
+            while(nset.firstChild){
+                nset.removeChild(nset.firstChild);
+            }
+            nset.appendChild( document.createTextNode(nickName + " - " + rest + " |" + runTimeA + runTimeB + runTimeC + runTimeD + runTimeE + totalRunTime));
+        }
+        
+        if (nickName == undefined || nickName == "None" || nickName == "undefined"){
+            if((totA + totB + totC + totD + totE) < 1){
+            var nn = "nickname:" + znumber;
+            var nset = document.getElementById( nn );
+            if ( nset != null){
+                while(nset.firstChild){
+                    nset.removeChild(nset.firstChild);
+                }
+                }
+            }
+        }
+		
+		//check the deactivate/auto/activate status and update
+		var autobtn = document.getElementById("auto:"+znumber);
+		var onbtn = document.getElementById("on:"+znumber);
+		var offbtn = document.getElementById("off:"+znumber);
+		
+		var activateColor = "#8aab61";
+		var deactivateColor = "#eb6b34";
+		var autoColor = "#25909c";
+		var emptyColor = "#4d4d4d";
+		
+		autobtn.style.backgroundColor = emptyColor;
+		onbtn.style.backgroundColor = emptyColor;
+		offbtn.style.backgroundColor = emptyColor;
+		  //  deactivateButton.classList.remove("animate-flicker");
+		
+		if (manualOverride == "0"){
+			autobtn.style.backgroundColor = emptyColor;
+			onbtn.style.backgroundColor = emptyColor;
+			offbtn.style.backgroundColor = deactivateColor;
+			offbtn.classList.remove("animate-flicker");
+		}
+		if (manualOverride == "1"){
+			autobtn.style.backgroundColor = autoColor;
+			autobtn.classList.remove("animate-flicker");
+			onbtn.style.backgroundColor = emptyColor;
+			offbtn.style.backgroundColor = emptyColor;
+		}
+		if (manualOverride == "2"){
+			autobtn.style.backgroundColor = emptyColor;
+			onbtn.style.backgroundColor = activateColor;
+			onbtn.classList.remove("animate-flicker");
+			offbtn.style.backgroundColor = emptyColor;
+		}
+
+		var status = document.getElementById("status:"+znumber);
+
+		if (activeState == "yes"){
+			status.style.backgroundColor = activateColor;
+			status.classList.add("animate-flicker");
+			 while(status.firstChild){
+               status.removeChild(status.firstChild);
+            }
+            status.appendChild( document.createTextNode( "[[watering]]" ));
+		}
+		if (activeState != "yes"){
+			status.style.backgroundColor = emptyColor;
+			status.classList.remove("animate-flicker");
+			while(status.firstChild){
+               status.removeChild(status.firstChild);
+            }
+            status.appendChild( document.createTextNode( "[[standby]]" ));
+		}
+    }
+    
+}
+
+function overview(){
+    for (var i = 1; i < 24; i++) {
+        socket.send("overview," + i);
+    }
+}
+	
+function geoLookup(){
+        socket.send("geoLookup");
+}
+	
+function systemStatus(){
+	socket.send("systemStatus");
+}
+    
+
+function socketStatus(){    
+    var uptime = document.getElementById( "uptime" );
+    var errmsg = "server error - attempt refreshing page";
+    var okmsg = "server ready"
+	var deactivateColor = "#eb6b34";
+    if (socket.readyState === WebSocket.CLOSED){
+            
+            while(uptime.firstChild){
+               uptime.removeChild(uptime.firstChild);
+            }
+                    uptime.appendChild( document.createTextNode( errmsg ));
+					uptime.style.backgroundColor = deactivateColor;
+					uptime.classList.add("animate-flicker");
+
+    }
+    if (socket.readyState === WebSocket.OPEN){
+                    while(uptime.firstChild){
+               uptime.removeChild(uptime.firstChild);
+            }
+                    uptime.appendChild( document.createTextNode( okmsg ));
+    }
+}
+function weatherStatus(){
+    socket.send("weather");
+}
+
+function currentTime(){
+	socket.send("time");
+}
+	
+function currentNetwork(){
+	socket.send("ntwk");
+}
+
+function noticeDisplay(){
+	socket.send("ntc")
+}
+    
+//BUILDS OUT QUICK OVERVIEW OF SYSTEM
+//USE PRIME INTERVALS TO MINIMIZE COLLISION
+var interval5 = setInterval(function () { currentTime(); }, 1307);
+var interval1 = setInterval(function () { socketStatus(); }, 1503);
+var interval6 = setInterval(function () { currentNetwork(); }, 1701);
+var interval7 = setInterval(function () { noticeDisplay(); }, 1901);
+var interval3 = setInterval(function () { weatherStatus(); }, 2109);
+var interval2 = setInterval(function () { overview(); }, 2307);
+var interval4 = setInterval(function () { geoLookup(); }, 2701);
+var interval8 = setInterval(function () { systemStatus(); }, 2907);
+
+
+
+
+
+
+    
+function zoneLoader(i){
+	zonemodal.style.display = "block";
+	var obj = document.getElementById("zoneModalHeader");
+	obj.innerText = "zone " + i;
+    zone = i;
+    socket.send("loadingZone," + i);
+    socket.send("loadingRestrictions" + i);
+    window.scrollTo(0,0);
+}
+function timeSet(x) {
+    var xstring = x.toString();
+    var cycle;
+    var tset = xstring.split(':');
+    var onTime = document.getElementById(tset[0]).value;
+    var offTime = document.getElementById(tset[1]).value;
+    if (tset[0].includes("A")){var cycle = "a";}
+    if (tset[0].includes("B")){var cycle = "b";}
+    if (tset[0].includes("C")){var cycle = "c";}
+    if (tset[0].includes("D")){var cycle = "d";}
+    if (tset[0].includes("E")){var cycle = "e";}
+    
+    if (onTime == "" && offTime != ""){
+        onTime = "99:99";
+        timeClear(x);
+        window.alert("error - both fields must be completed");
+    }
+    
+    
+    if (offTime < onTime){
+        window.alert("error - start time cannot be before end time");
+        timeClear(x);
+    }
+    
+    if (onTime < offTime){
+        socket.send("zoneSet," + zone + "," + cycle + "," + onTime + "," + offTime);
+        window.alert("time set!");
+    }
+    
+	var onHour = onTime.split(":")[0];
+	var onMinute = onTime.split(":")[1];
+	var offHour = offTime.split(":")[0];
+	var offMinute = offTime.split(":")[1];
+	
+	var wateringHours = ((offHour * 60) - (onHour * 60));
+	var wateringMinutes = (offMinute - onMinute);
+	var wateringTime = wateringHours + wateringMinutes;
+		
+    if (wateringTime > 60){
+        window.confirm("warning - this is a long watering cycle");
+        socket.send("zoneSet," + zone + "," + cycle + "," + onTime + "," + offTime);
+        //window.alert("time set!");
+    }
+    
+    
+}
+    
+function timeClear(x) {
+    var xstring = x.toString();
+    var tclear = xstring.split(':');
+    document.getElementById(tclear[0]).value = "";
+    document.getElementById(tclear[1]).value = "";
+    if (tclear[0].includes("A")){var cycle = "a";}
+    if (tclear[0].includes("B")){var cycle = "b";}
+    if (tclear[0].includes("C")){var cycle = "c";}
+    if (tclear[0].includes("D")){var cycle = "d";}
+    if (tclear[0].includes("E")){var cycle = "e";}
+    socket.send("zoneSet," + zone + "," + cycle + ",99:99,99:99");
+}
+    
+function nameSet(){
+    var zoneName = document.getElementById("zoneNickname").value;
+    socket.send("nameSet," + zone + "," + zoneName); 
+    window.alert("name: " + zoneName + " set")
+}    
+function nameRemove(){
+    document.getElementById("zoneNickname").value = "";
+    zoneName = "None";
+    socket.send("nameSet," + zone + "," + "undefined");
+    window.alert("name removed")
+}  
+    
+function zipLookup(){
+    var zip = document.getElementById("zipcode").value;
+    if (zip.length < 5){
+        document.getElementById("zipcode").value = "";
+        window.alert("error - zip code must be 5 digits");
+    }
+    if (zip.length == 5){
+        socket.send("zipLookup," + zip);
+        
+    }
+}
+
+function zipConfirm(){
+    var zip = document.getElementById("zipcode").value;
+
+    if (zip.length < 5){
+        document.getElementById("zipcode").value = "";
+        window.alert("error - zip code must be 5 digits");
+    }
+        if (zip.length == 5){
+        socket.send("zipSubmit," + zip);
+		window.alert("submitted geolocation for weather");
+    }
+
+}
+
+function deactivate(i){
+    if (i<10){
+        i = "0" + i;
+    }
+    var deactivateButton = document.getElementById("off:" + i);
+    var activateButton = document.getElementById("on:" + i);
+    var autoButton = document.getElementById("auto:" + i);
+
+    deactivateButton.classList.add("animate-flicker");
+    autoButton.classList.remove("animate-flicker");
+    activateButton.classList.remove("animate-flicker");
+    socket.send("manualOverride,"+i+",0");
+}
+function auto(i){
+        if (i<10){
+        i = "0" + i;
+    }
+    var deactivateButton = document.getElementById("off:" + i);
+    var autoButton = document.getElementById("auto:" + i);
+        var activateButton = document.getElementById("on:" + i);
+
+    deactivateButton.classList.remove("animate-flicker");
+    autoButton.classList.add("animate-flicker");
+    activateButton.classList.remove("animate-flicker");
+    socket.send("manualOverride,"+i+",1");
+}
+function activate(i){
+        if (i<10){
+        i = "0" + i;
+    }
+    var deactivateButton = document.getElementById("off:" + i);
+    var activateButton = document.getElementById("on:" + i);
+        var autoButton = document.getElementById("auto:" + i);
+
+    deactivateButton.classList.remove("animate-flicker");
+    autoButton.classList.remove("animate-flicker");
+    activateButton.classList.add("animate-flicker");
+    socket.send("manualOverride,"+i+",2");
+}
+
+    
+var ndays = document.getElementById("nDays");
+ndays.style.display = "block";
+var daysofweek = document.getElementById("daysofweek");
+daysofweek.style.display = "none";
+var daysofmonth = document.getElementById("daysofmonth");
+daysofmonth.style.display = "none";
+
+function restrictionSet(){
+    var m = document.getElementById("monday");
+    var t = document.getElementById("tuesday");
+    var w = document.getElementById("wednesday");
+    var Th = document.getElementById("thursday");
+    var f = document.getElementById("friday");
+    var Sa = document.getElementById("saturday");
+    var Su = document.getElementById("sunday");
+    var ndays = document.getElementById("nDays");
+	
+	var d01 = document.getElementById("d01");
+	var d02 = document.getElementById("d02");
+	var d03 = document.getElementById("d03");
+	var d04 = document.getElementById("d04");
+	var d05 = document.getElementById("d05");
+	var d06 = document.getElementById("d06");
+	var d07 = document.getElementById("d07");
+	var d08 = document.getElementById("d08");
+	var d09 = document.getElementById("d09");
+	var d10 = document.getElementById("d10");
+	var d11 = document.getElementById("d11");
+	var d12 = document.getElementById("d12");
+	var d13 = document.getElementById("d13");
+	var d14 = document.getElementById("d14");
+	var d15 = document.getElementById("d15");
+	var d16 = document.getElementById("d16");
+	var d17 = document.getElementById("d17");
+	var d18 = document.getElementById("d18");
+	var d19 = document.getElementById("d19");
+	var d20 = document.getElementById("d20");
+	var d21 = document.getElementById("d21");
+	var d22 = document.getElementById("d22");
+	var d23 = document.getElementById("d23");
+	var d24 = document.getElementById("d24");
+	var d25 = document.getElementById("d25");
+	var d26 = document.getElementById("d26");
+	var d27 = document.getElementById("d27");
+	var d28 = document.getElementById("d28");
+	var d29 = document.getElementById("d29");
+	var d30 = document.getElementById("d30");
+	var d31 = document.getElementById("d31");
+	
+	if (d01.checked == true){
+		d01 = "d01";
+	}
+	if (d01.checked == false){
+		d01 = "";
+	}
+	if (d02.checked == true){
+		d02 = "d02";
+	}
+	if (d02.checked == false){
+		d02 = "";
+	}
+		if (d03.checked == true){
+		d03 = "d03";
+	}
+	if (d03.checked == false){
+		d03 = "";
+	}
+		if (d04.checked == true){
+		d04 = "d04";
+	}
+	if (d04.checked == false){
+		d04 = "";
+	}
+		if (d05.checked == true){
+		d05 = "d05";
+	}
+	if (d05.checked == false){
+		d05 = "";
+	}
+		if (d06.checked == true){
+		d06 = "d06";
+	}
+	if (d06.checked == false){
+		d06 = "";
+	}
+		if (d07.checked == true){
+		d07 = "d07";
+	}
+	if (d07.checked == false){
+		d07 = "";
+	}
+    	if (d08.checked == true){
+		d08 = "d08";
+	}
+	if (d08.checked == false){
+		d08 = "";
+	}
+		if (d09.checked == true){
+		d09 = "d09";
+	}
+	if (d09.checked == false){
+		d09 = "";
+	}
+		if (d10.checked == true){
+		d10 = "d10";
+	}
+	if (d10.checked == false){
+		d10 = "";
+	}
+		if (d11.checked == true){
+		d11 = "d11";
+	}
+		if (d11.checked == false){
+		d11 = "";
+	}
+		if (d12.checked == true){
+		d12 = "d12";
+	}
+	if (d12.checked == false){
+		d12 = "";
+	}
+
+	if (d13.checked == true){
+		d13 = "d13";
+	}
+	if (d13.checked == false){
+		d13 = "";
+	}
+		if (d14.checked == true){
+		d14 = "d14";
+	}
+	if (d14.checked == false){
+		d14 = "";
+	}
+		if (d15.checked == true){
+		d15 = "d15";
+	}
+	if (d15.checked == false){
+		d15 = "";
+	}
+		if (d16.checked == true){
+		d16 = "d16";
+	}
+	if (d16.checked == false){
+		d16 = "";
+	}
+		if (d17.checked == true){
+		d17 = "d17";
+	}
+	if (d17.checked == false){
+		d17 = "";
+	}
+		if (d18.checked == true){
+		d18 = "d18";
+	}
+	if (d18.checked == false){
+		d18 = "";
+	}
+		if (d19.checked == true){
+		d19 = "d19";
+	}
+	if (d19.checked == false){
+		d19 = "";
+	}
+		if (d20.checked == true){
+		d20 = "d20";
+	}
+	if (d20.checked == false){
+		d20 = "";
+	}
+		if (d21.checked == true){
+		d21 = "d21";
+	}
+	if (d21.checked == false){
+		d21 = "";
+	}
+		if (d22.checked == true){
+		d22 = "d22";
+	}
+	if (d22.checked == false){
+		d22 = "";
+	}
+		if (d23.checked == true){
+		d23 = "d23";
+	}
+	if (d23.checked == false){
+		d23 = "";
+	}
+		if (d24.checked == true){
+		d24 = "d24";
+	}
+	if (d24.checked == false){
+		d24 = "";
+	}
+		if (d25.checked == true){
+		d25 = "d25";
+	}
+	if (d25.checked == false){
+		d25 = "";
+	}
+		if (d26.checked == true){
+		d26 = "d26";
+	}
+	if (d26.checked == false){
+		d26 = "";
+	}
+		if (d27.checked == true){
+		d27 = "d27";
+	}
+	if (d27.checked == false){
+		d27 = "";
+	}
+		if (d28.checked == true){
+		d28 = "d28";
+	}
+	if (d28.checked == false){
+		d28 = "";
+	}
+		if (d29.checked == true){
+		d29 = "d29";
+	}
+	if (d29.checked == false){
+		d29 = "";
+	}
+		if (d30.checked == true){
+		d30 = "d30";
+	}
+	if (d30.checked == false){
+		d30 = "";
+	}
+		if (d31.checked == true){
+		d31 = "d31";
+	}
+	if (d31.checked == false){
+		d31 = "";
+	}
+    if (m.checked == true){
+        m = "m";
+    }
+    if (t.checked == true){
+        t = "t";
+    }
+    if (w.checked == true){
+        w = "w";
+    }
+    if (Th.checked == true){
+        Th = "Th";
+    }
+    if (f.checked == true){
+        f = "f";
+    }
+    if (Sa.checked == true){
+        Sa = "Sa";
+    }
+    if (Su.checked == true){
+        Su = "Su";
+    }
+        if (m.checked == false){
+        m = "";
+    }
+    if (t.checked == false){
+        t = "";
+    }
+    if (w.checked == false){
+        w = "";
+    }
+    if (Th.checked == false){
+        Th = "";
+    }
+    if (f.checked == false){
+        f = "";
+    }
+    if (Sa.checked == false){
+        Sa = "";
+    }
+    if (Su.checked == false){
+        Su = "";
+    }
+    
+
+    if (ndays.value == "choose"){
+        restrictVals = "";
+
+    }
+	    if (ndays.value != "choose"){
+        restrictVals = ndays.value;
+		m = "";
+		t = "";
+		w = "";
+		Th = "";
+		f = "";
+		Sa = "";
+		Su = "";
+
+    }
+	
+	if (ndays.value == "month"){
+		restrictVals = "";
+
+	}
+    if (ndays.value != "month"){
+		d01 = "";
+		d02 = "";
+		d03 = "";
+		d04 = "";
+		d05 = "";
+		d06 = "";
+		d07 = "";
+		d08 = "";
+		d09 = "";
+		d10 = "";
+		d11 = "";
+		d12 = "";
+		d13 = "";
+		d14 = "";
+		d15 = "";
+		d16 = "";
+		d17 = "";
+		d18 = "";
+		d19 = "";
+		d20 = "";
+		d21 = "";
+		d22 = "";
+		d23 = "";
+		d24 = "";
+		d25 = "";
+		d26 = "";
+		d27 = "";
+		d28 = "";
+		d29 = "";
+		d30 = "";
+		d31 = "";
+		
+	}
+
+    socket.send("restrictions," + zone + "," + "'" + restrictVals+m+t+w+Th+f+Sa+Su+d01+d02+d03+d04+d05+d06+d07+d08+d09+d10+d11+d12+d13+d14+d15+d16+d17+d18+d19+d20+d21+d22+d23+d24+d25+d26+d27+d28+d29+d30+d31 + "'");
+	window.alert("restricted zone " + zone + " watering");
+    
+}
+	
+function displayRestrictions(){
+	var ndays = document.getElementById("nDays");
+	var daysofweek = document.getElementById("daysofweek");
+    
+	var nd = document.getElementById("nDays").value;
+
+    if(nd == "choose"){
+        daysofweek.style.display = "block";
+    }
+    if (nd != "choose") {
+        daysofweek.style.display = "none";
+        document.getElementById("monday").value = "";
+        document.getElementById("tuesday").value = "";
+        document.getElementById("wednesday").value = "";
+        document.getElementById("thursday").value = "";
+        document.getElementById("friday").value = "";
+        document.getElementById("saturday").value = "";
+        document.getElementById("sunday").value = "";
+
+    }
+	if(nd == "month"){
+        daysofmonth.style.display = "block";
+    }
+	if(nd != "month"){
+        daysofmonth.style.display = "none";
+		document.getElementById("d01").value = "";
+		document.getElementById("d01").value = "";
+		document.getElementById("d02").value = "";
+		document.getElementById("d03").value = "";
+		document.getElementById("d04").value = "";
+		document.getElementById("d05").value = "";
+		document.getElementById("d06").value = "";
+		document.getElementById("d07").value = "";
+		document.getElementById("d08").value = "";
+		document.getElementById("d09").value = "";
+		document.getElementById("d10").value = "";
+		document.getElementById("d11").value = "";
+		document.getElementById("d12").value = "";
+		document.getElementById("d13").value = "";
+		document.getElementById("d14").value = "";
+		document.getElementById("d15").value = "";
+		document.getElementById("d16").value = "";
+		document.getElementById("d17").value = "";
+		document.getElementById("d18").value = "";
+		document.getElementById("d19").value = "";
+		document.getElementById("d20").value = "";
+		document.getElementById("d21").value = "";
+		document.getElementById("d22").value = "";
+		document.getElementById("d23").value = "";
+		document.getElementById("d24").value = "";
+		document.getElementById("d25").value = "";
+		document.getElementById("d26").value = "";
+		document.getElementById("d27").value = "";
+		document.getElementById("d28").value = "";
+		document.getElementById("d29").value = "";
+		document.getElementById("d30").value = "";
+		document.getElementById("d31").value = "";
+    }
+}
+    function loadingRestrictions(x){
+        window.alert("test" + x);
+    }
+	
+	function submitRainLimit(){
+		var pop = document.getElementById("pop").value;
+		socket.send("pop," + pop);
+		window.alert("do not water if chance of rain is equal to or above: " + pop + "%" )
+	}
+
+	function submitEmail(){
+		//email
+		var email = document.getElementById("email").value;
+		socket.send("email," + "'" + email + "'");
+	}
+	
+	function submitMobile(){
+		//mobile + carriers
+		var mobile = document.getElementById("mobile").value;
+		var carrier = document.getElementById("carrier").value;
+		socket.send("email," + "'" + mobile + carrier + "'");
+	}
+	
+	function submitFrequency(){
+		var fqy = document.getElementById("fqy").value;
+		socket.send("frequency," + "'" + fqy + "'");
+
+
+	}
+    
+	function testNotices(){
+		socket.send("testEmail");
+	}
+	
+	function submitWifi(){
+		var ssid = document.getElementById("ssid").value;
+		var password = document.getElementById("password").value;
+		socket.send("wifi," + "'" + ssid + "'" + "," + "'" + password + "'");
+		window.alert("submitted wifi credentials");
+	}
+	function joinWifi(){
+		var nojoin = "no";
+		socket.send("join," + "'" + nojoin + "'");
+		window.alert("system will attempt to join wifi three times, if unsuccessful, system will fail over to it's own wifi");
+		
+	}
+	function createWifi(){
+		var join = "yes";
+		socket.send("join," + "'" + join + "'");
+		window.alert("system will attempt to create it's own wifi in 15 seconds, without internet - wifi: local password: mastershake");
+		
+	}
+	function shutdown(){
+		window.alert("this will safely shut down the system - you must unplug and reconnect power to boot up again")
+		socket.send("shutdown");
+	}
+	
+</script>
+    
+</body>
+
+</html>
